@@ -41,3 +41,43 @@ export const addCategories = (categories) => ({
 	type: ActionTypes.ADD_CATEGORIES,
 	payload: categories,
 });
+
+export const fetchDirectory = () => (dispatch) => {
+	dispatch(directoryLoading());
+
+	return fetch(baseUrl + "directory")
+		.then(
+			(response) => {
+				if (response.ok) {
+					return response;
+				} else {
+					const error = new Error(
+						`Error ${response.status}: ${response.statusText}`
+					);
+					error.response = response;
+					throw error;
+				}
+			},
+			(error) => {
+				const errMess = new Error(error.message);
+				throw errMess;
+			}
+		)
+		.then((response) => response.json())
+		.then((directory) => dispatch(addDirectory(directory)))
+		.catch((error) => dispatch(directoryFailed(error.message)));
+};
+
+export const directoryLoading = () => ({
+	type: ActionTypes.DIRECTORY_LOADING,
+});
+
+export const directoryFailed = (errMess) => ({
+	type: ActionTypes.DIRECTORY_FAILED,
+	payload: errMess,
+});
+
+export const addDirectory = (directory) => ({
+	type: ActionTypes.ADD_DIRECTORY,
+	payload: directory,
+});

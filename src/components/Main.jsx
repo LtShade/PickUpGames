@@ -6,7 +6,7 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchCategories } from "../redux/ActionCreators";
+import { fetchCategories, fetchDirectory } from "../redux/ActionCreators";
 
 const mapStateToProps = (state) => {
 	return {
@@ -17,11 +17,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
 	fetchCategories: () => fetchCategories(),
+	fetchDirectory: () => fetchDirectory(),
 };
 
 class Main extends Component {
 	componentDidMount() {
 		this.props.fetchCategories();
+		this.props.fetchDirectory();
 	}
 	render() {
 		const HomePage = () => {
