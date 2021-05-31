@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import {
+	FaChess,
+	FaDiceD20,
+	FaFootballBall,
+	FaFortAwesome,
+	FaUserFriends,
+} from "react-icons/fa";
 
 const Home = (props) => {
+	console.log(props);
 	let page = window.location.pathname.replace("/", "");
 	let filteredResults = props.directory.directory;
 	if (page !== "" && page !== "all") {
@@ -58,7 +66,9 @@ const ListResults = ({ results }) => {
 						<div key={result.id} className="result rnd">
 							<div className="">
 								<h5 className="">{result.title}</h5>
-								<div className="genre-tokens">[Placeholder for icons.]</div>
+								<div className="genre-tokens">
+									<ResultIcons result={result} />
+								</div>
 								<p className="">{result.briefDesc}</p>
 							</div>
 						</div>
@@ -70,6 +80,42 @@ const ListResults = ({ results }) => {
 		return <></>;
 	}
 };
+
+class ResultIcons extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			iconAtheletic: "hidden",
+			iconBoardgame: "hidden",
+			iconRoleplay: "hidden",
+			iconTabletop: "hidden",
+			iconOther: "hidden",
+		};
+	}
+
+	render() {
+		console.log(this.props.result);
+		return (
+			<>
+				<FaFootballBall
+					className={this.props.result.iconAtheletic ? "" : "hidden"}
+				/>
+				{"   "}
+				<FaChess className={this.props.result.iconBoardgame ? "" : "hidden"} />
+				{"   "}
+				<FaDiceD20 className={this.props.result.iconRoleplay ? "" : "hidden"} />
+				{"   "}
+				<FaFortAwesome
+					className={this.props.result.iconTabletop ? "" : "hidden"}
+				/>
+				{"   "}
+				<FaUserFriends
+					className={this.props.result.iconOther ? "" : "hidden"}
+				/>
+			</>
+		);
+	}
+}
 
 class FilterButton extends Component {
 	constructor(props) {

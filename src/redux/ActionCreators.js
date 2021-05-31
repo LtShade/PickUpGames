@@ -1,6 +1,5 @@
 import * as ActionTypes from "./ActionTypes";
 import { baseUrl } from "../js/baseUrl";
-import { directory } from "./directory";
 
 export const fetchCategories = () => (dispatch) => {
 	dispatch(categoriesLoading());
@@ -81,3 +80,42 @@ export const addDirectory = (directory) => ({
 	type: ActionTypes.ADD_DIRECTORY,
 	payload: directory,
 });
+
+export const postPosting = (posting) => () => {
+	const newPosting = posting;
+
+	return fetch(baseUrl + "directory", {
+		method: "POST",
+		body: JSON.stringify(newPosting),
+		headers: {
+			"Content-Type": "application/json",
+		},
+	})
+		.then(
+			(response) => {
+				if (response.ok) {
+					return response;
+				} else {
+					const error = new Error(
+						`Error ${response.status}: ${response.statusText}`
+					);
+					error.response = response;
+					throw error;
+				}
+			},
+			(error) => {
+				throw error;
+			}
+		)
+		.then((response) => response.json())
+		.then((response) =>
+			alert("Thank you for your submission\n" + JSON.stringify(response))
+		)
+		.catch((error) => {
+			console.log("posting", error.message);
+			alert(
+				"Your submission could not be posted in the directory\nError: " +
+					error.message
+			);
+		});
+};

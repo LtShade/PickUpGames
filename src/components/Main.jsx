@@ -6,18 +6,26 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchCategories, fetchDirectory } from "../redux/ActionCreators";
+import { actions } from "react-redux-form";
+import {
+	fetchCategories,
+	fetchDirectory,
+	postPosting,
+} from "../redux/ActionCreators";
 
 const mapStateToProps = (state) => {
 	return {
 		directory: state.directory,
 		categories: state.categories,
+		posting: state.posting,
 	};
 };
 
 const mapDispatchToProps = {
 	fetchCategories: () => fetchCategories(),
 	fetchDirectory: () => fetchDirectory(),
+	postPosting: (posting) => postPosting(posting),
+	resetPostingForm: () => actions.reset("addPostingForm"),
 };
 
 class Main extends Component {
@@ -42,7 +50,16 @@ class Main extends Component {
 				<Header />
 				<Switch>
 					<Route path="/about" component={About} />
-					<Route path="/addposting" component={AddPosting} />
+					<Route
+						exact
+						path="/addposting"
+						render={() => (
+							<AddPosting
+								resetPostingForm={this.props.resetPostingForm}
+								postPosting={this.props.postPosting}
+							/>
+						)}
+					/>
 					<Route path="/:filter" component={HomePage} />
 					<Route path="/" component={HomePage} />
 				</Switch>

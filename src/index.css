@@ -193,6 +193,11 @@ h5 {
 	justify-content: center;
 }
 
+.leftContent {
+	text-align: left;
+	justify-content: left;
+}
+
 [class*="col-"] {
 	padding: 5px;
 	float: left;
@@ -320,6 +325,13 @@ img {
 	margin: 0%;
 }
 
+/* ul.categorychecklist {
+	list-style: none;
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+} */
+
 .result {
 	border-color: rgba(0, 0, 0, 0.15);
 	border-style: solid;
@@ -336,7 +348,7 @@ img {
 		0rem 0.5rem 0.75rem rgba(0, 0, 0, 0.18);
 }
 
-input,
+input[type="text"],
 textarea {
 	align-items: center;
 	color: black;
@@ -358,6 +370,19 @@ input[type="date" i] {
 
 .input-label {
 	padding-top: 10px;
+}
+
+.icon-selected {
+	border-color: rgb(0, 0, 0, 1);
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 5px;
+	padding: 5px, 5px, 5px, 5px;
+}
+
+.icon-label {
+	height: 16px;
+	padding-right: 1rem;
 }
 
 .hidden {
