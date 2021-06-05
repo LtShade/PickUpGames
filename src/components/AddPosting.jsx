@@ -27,13 +27,16 @@ class AddPosting extends Component {
 	}
 
 	handleSubmit(values) {
-		this.props.postPosting(values);
-		console.log(this.props);
+		//Concatenate icon checks into an array
+		const iconValues = [];
+		console.log(values);
+		//this.props.postPosting(values);
 	}
 
 	handleChange(values) {}
 
 	handleUpdate(form) {
+		//Find a better solution for this. I want check boxes but this is annoying and a pain in the butt pending new updates.
 		form.iconAtheletic.value
 			? this.setState({ atheleticClass: "icon-selected" })
 			: this.setState({ atheleticClass: "icon" });

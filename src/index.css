@@ -385,6 +385,10 @@ input[type="date" i] {
 	padding-right: 1rem;
 }
 
+.link-btn {
+	text-decoration: none;
+}
+
 .hidden {
 	display: none;
 }

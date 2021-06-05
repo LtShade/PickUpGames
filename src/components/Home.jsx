@@ -38,7 +38,11 @@ const Home = (props) => {
 const Map = () => {
 	return (
 		<>
-			<img src="img/PlaceholderMap.jpg" className="rnd-hvy lg-remove" />
+			<img
+				src="img/PlaceholderMap.jpg"
+				className="rnd-hvy lg-remove"
+				alt="Pay Google Later"
+			/>
 		</>
 	);
 };
@@ -50,7 +54,11 @@ const Listing = ({ searchResults, categories }) => {
 			<FilterButton list={categories} />
 			<div id="results" className="row">
 				<div className="col">
-					<ListResults results={searchResults} />
+					{/* List top 5 for demo */}
+					<ListResults results={searchResults.slice(0, 5)} />
+					<Link id="addListing" to="/addposting" className="link-btn">
+						<div className="btn btnPUGP">Add Your Own Listing</div>
+					</Link>
 				</div>
 			</div>
 		</div>
@@ -94,7 +102,6 @@ class ResultIcons extends Component {
 	}
 
 	render() {
-		console.log(this.props.result);
 		return (
 			<>
 				<FaFootballBall
