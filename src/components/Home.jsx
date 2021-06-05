@@ -7,6 +7,8 @@ import {
 	FaFortAwesome,
 	FaUserFriends,
 } from "react-icons/fa";
+import { Fade, Stagger } from "react-animation-components";
+import { Loading } from "./Loading";
 
 const Home = (props) => {
 	console.log(props);
@@ -24,7 +26,7 @@ const Home = (props) => {
 			<div className="col-3">
 				<Listing
 					searchResults={filteredResults}
-					categories={props.categories.categories}
+					categories={props.categories}
 				/>
 			</div>
 			<div className="col-7 center">
@@ -48,40 +50,72 @@ const Map = () => {
 };
 
 const Listing = ({ searchResults, categories }) => {
-	return (
-		<div className="row">
-			<RandomButton list={categories} />
-			<FilterButton list={categories} />
-			<div id="results" className="row">
-				<div className="col">
-					{/* List top 5 for demo */}
-					<ListResults results={searchResults.slice(0, 5)} />
-					<Link id="addListing" to="/addposting" className="link-btn">
-						<div className="btn btnPUGP">Add Your Own Listing</div>
-					</Link>
+	if (categories.isLoading) {
+		return (
+			<div className="row">
+				<RandomButton list={categories.categories} />
+				<FilterButton list={categories.categories} />
+				<div id="results" className="row">
+					<div className="col">
+						<Loading />
+					</div>
 				</div>
 			</div>
-		</div>
-	);
+		);
+	} else if (categories.errMess) {
+		return (
+			<div className="row">
+				<RandomButton list={categories.categories} />
+				<FilterButton list={categories.categories} />
+				<div id="results" className="row">
+					<div className="col">{categories.errMess}</div>
+				</div>
+			</div>
+		);
+	} else {
+		return (
+			<div className="row">
+				<RandomButton list={categories.categories} />
+				<FilterButton list={categories.categories} />
+				<div id="results" className="row">
+					<div className="col">
+						{/* List top 5 for demo */}
+						<ListResults results={searchResults.slice(0, 5)} />
+					</div>
+				</div>
+			</div>
+		);
+	}
 };
 
 const ListResults = ({ results }) => {
 	if (results) {
 		return (
 			<div>
-				{results.map((result) => {
-					return (
-						<div key={result.id} className="result rnd">
-							<div className="">
-								<h5 className="">{result.title}</h5>
-								<div className="genre-tokens">
-									<ResultIcons result={result} />
+				<Stagger in delay={200}>
+					{results.map((result) => {
+						return (
+							<Fade in key={results.id}>
+								<div key={result.id} className="result rnd">
+									<div className="">
+										<h5 className="">{result.title}</h5>
+
+										<div className="genre-tokens">
+											<ResultIcons result={result} />
+										</div>
+
+										<p className="">{result.briefDesc}</p>
+									</div>
 								</div>
-								<p className="">{result.briefDesc}</p>
-							</div>
-						</div>
-					);
-				})}
+							</Fade>
+						);
+					})}
+					<Fade in key="addListing">
+						<Link id="addListing" to="/addposting" className="link-btn">
+							<div className="btn btnPUGP">Add Your Own Listing</div>
+						</Link>
+					</Fade>
+				</Stagger>
 			</div>
 		);
 	} else {
