@@ -27,10 +27,9 @@ class AddPosting extends Component {
 	}
 
 	handleSubmit(values) {
-		//Concatenate icon checks into an array
-		const iconValues = [];
-		console.log(values);
-		//this.props.postPosting(values);
+		//add array of icon names for categorization
+		values.iconValues = [];
+		this.props.postPosting(values);
 	}
 
 	handleChange(values) {}

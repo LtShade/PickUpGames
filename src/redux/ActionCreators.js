@@ -81,6 +81,11 @@ export const addDirectory = (directory) => ({
 	payload: directory,
 });
 
+export const setTheme = (page) => ({
+	type: ActionTypes.SET_THEME,
+	payload: page,
+});
+
 export const postPosting = (posting) => () => {
 	const newPosting = posting;
 

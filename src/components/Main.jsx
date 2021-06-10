@@ -11,6 +11,7 @@ import {
 	fetchCategories,
 	fetchDirectory,
 	postPosting,
+	setTheme,
 } from "../redux/ActionCreators";
 
 const mapStateToProps = (state) => {
@@ -18,6 +19,7 @@ const mapStateToProps = (state) => {
 		directory: state.directory,
 		categories: state.categories,
 		posting: state.posting,
+		theme: state.theme,
 	};
 };
 
@@ -26,6 +28,7 @@ const mapDispatchToProps = {
 	fetchDirectory: () => fetchDirectory(),
 	postPosting: (posting) => postPosting(posting),
 	resetPostingForm: () => actions.reset("addPostingForm"),
+	setTheme: (page) => setTheme(page),
 };
 
 class Main extends Component {
@@ -33,6 +36,16 @@ class Main extends Component {
 		this.props.fetchCategories();
 		this.props.fetchDirectory();
 	}
+
+	componentDidUpdate(prevProps) {
+		if (this.props.theme !== prevProps.theme) {
+			this.props.setTheme(window.location.pathname.replace("/", ""));
+			console.log("Updated");
+		} else {
+			console.log("Did not update");
+		}
+	}
+
 	render() {
 		const HomePage = () => {
 			return (
@@ -40,6 +53,8 @@ class Main extends Component {
 					<Home
 						directory={this.props.directory}
 						categories={this.props.categories}
+						theme={this.props.theme}
+						setTheme={this.props.setTheme}
 					/>
 				</>
 			);

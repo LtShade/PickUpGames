@@ -1,12 +1,3 @@
-/* --- Primary --- */
-/*
-    #fcfffd
-    #e8ac40
-    #32d175
-    #21b9f2
-    #344358
-*/
-
 body {
 	font-family: "Lustria", serif;
 	background-color: #fcfffd;
@@ -389,8 +380,42 @@ input[type="date" i] {
 	text-decoration: none;
 }
 
-.hidden {
-	display: none;
+/* --- Primary --- */
+/*
+    #fcfffd bodybackground/h1 color/taglinecolor
+    #e8ac40 h2-4 color/headerbackground
+    #32d175
+    #21b9f2
+    #344358 
+*/
+/*
+	color-1 fcfffd
+	color-2 e8ac40
+	bkgrnd-1 fcfffd
+	bkgrnd-2 e8ac40
+	bkgrnd-3 21b9f2
+	bkgrnd-4 32d175
+*/
+
+/* --- Primary ---*/
+
+.color-1 {
+	color: #fcfffd;
+}
+.color-2 {
+	color: #e8ac40;
+}
+.bkgrnd-1 {
+	color: #fcfffd;
+}
+.bkgrnd-2 {
+	color: #e8ac40;
+}
+.bkgrnd-3 {
+	color: #21b9f2;
+}
+.bkgrnd-4 {
+	color: #32d175;
 }
 
 /* --- Athletics --- */
@@ -402,9 +427,30 @@ input[type="date" i] {
     #0f4129
 */
 
+.color-1ath {
+	color: #eee6e5;
+}
+.color-2ath {
+	color: #fcc88e;
+}
+.bkgrnd-1ath {
+	color: #eee6e5;
+}
+.bkgrnd-2ath {
+	color: #fcc88e;
+}
+.bkgrnd-3ath {
+	color: #4d9674;
+}
+.bkgrnd-4ath {
+	color: #2cc3fd;
+}
+
+/* ----- Color Swapping ----- */
+
 /* --- Boardgames --- */
 /* 
-    #ffffff
+    #ffffff 
     #31767b
     #5b5287
     #102425
@@ -429,3 +475,27 @@ input[type="date" i] {
     #211d1d
     #271d2f
 */
+
+/* .color-1 {
+	color:#fcfffd
+}
+.color-2 {
+	color:#e8ac40
+}
+.bkgrnd-1 {
+	color:#fcfffd
+}
+.bkgrnd-2 {
+	color:#e8ac40
+}
+.bkgrnd-3 {
+	color:#21b9f2
+}
+.bkgrnd-4 {
+	color:#32d175
+} */
+
+/*-----------Dirty Override if Necessary-----------*/
+.hidden {
+	display: none;
+}

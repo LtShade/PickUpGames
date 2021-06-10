@@ -10,32 +10,53 @@ import {
 import { Fade, Stagger } from "react-animation-components";
 import { Loading } from "./Loading";
 
-const Home = (props) => {
-	console.log(props);
-	let page = window.location.pathname.replace("/", "");
-	let filteredResults = props.directory.directory;
-	if (page !== "" && page !== "all") {
-		filteredResults = props.directory.directory.filter(
-			(r) => r.icons.filter((cur) => cur === page)[0]
-		);
+class Home extends Component {
+	componentDidMount() {}
+
+	//I feel dirty for doing this.
+	getTheme() {
+		console.log(this.props.theme);
+		if (typeof this.props.theme != "object") {
+			return {
+				name: "fallback",
+				color1: "",
+				color2: "",
+				bkgrnd1: "",
+				bkgrnd2: "",
+				bkgrnd3: "",
+			};
+		} else {
+			return this.props.theme;
+		}
 	}
 
-	return (
-		<div className=" centerContent">
-			<div className="col-1" />
-			<div className="col-3">
-				<Listing
-					searchResults={filteredResults}
-					categories={props.categories}
-				/>
+	render() {
+		let page = window.location.pathname.replace("/", "");
+		let filteredResults = this.props.directory.directory;
+		if (page !== "" && page !== "all") {
+			filteredResults = this.props.directory.directory.filter(
+				(r) => r.icons.filter((cur) => cur === page)[0]
+			);
+		}
+
+		return (
+			<div className=" centerContent">
+				<div className="col-1" />
+				<div className="col-3">
+					<Listing
+						searchResults={filteredResults}
+						categories={this.props.categories}
+						theme={this.getTheme()}
+					/>
+				</div>
+				<div className="col-7 center">
+					<Map theme={this.getTheme()} />
+				</div>
+				<div className="col-1" />
 			</div>
-			<div className="col-7 center">
-				<Map />
-			</div>
-			<div className="col-1" />
-		</div>
-	);
-};
+		);
+	}
+}
 
 const Map = () => {
 	return (
@@ -49,12 +70,12 @@ const Map = () => {
 	);
 };
 
-const Listing = ({ searchResults, categories }) => {
-	if (categories.isLoading) {
+const Listing = (props) => {
+	if (props.categories.isLoading) {
 		return (
 			<div className="row">
-				<RandomButton list={categories.categories} />
-				<FilterButton list={categories.categories} />
+				<RandomButton list={props.categories.categories} theme={props.theme} />
+				<FilterButton list={props.categories.categories} theme={props.theme} />
 				<div id="results" className="row">
 					<div className="col">
 						<Loading />
@@ -62,25 +83,28 @@ const Listing = ({ searchResults, categories }) => {
 				</div>
 			</div>
 		);
-	} else if (categories.errMess) {
+	} else if (props.categories.errMess) {
 		return (
 			<div className="row">
-				<RandomButton list={categories.categories} />
-				<FilterButton list={categories.categories} />
+				<RandomButton list={props.categories.categories} theme={props.theme} />
+				<FilterButton list={props.categories.categories} theme={props.theme} />
 				<div id="results" className="row">
-					<div className="col">{categories.errMess}</div>
+					<div className="col">{props.categories.errMess}</div>
 				</div>
 			</div>
 		);
 	} else {
 		return (
 			<div className="row">
-				<RandomButton list={categories.categories} />
-				<FilterButton list={categories.categories} />
+				<RandomButton list={props.categories.categories} theme={props.theme} />
+				<FilterButton list={props.categories.categories} theme={props.theme} />
 				<div id="results" className="row">
 					<div className="col">
 						{/* List top 5 for demo */}
-						<ListResults results={searchResults.slice(0, 5)} />
+						<ListResults
+							results={props.searchResults.slice(0, 5)}
+							theme={props.theme}
+						/>
 					</div>
 				</div>
 			</div>
@@ -219,21 +243,35 @@ class FilterDropdown extends Component {
 	}
 }
 
-const RandomButton = (props) => {
-	let text = "All";
-	if (window.location.pathname !== "/") {
-		text = props.list.filter(
-			(category) => category.id === window.location.pathname.replace("/", "")
-		)[0].name;
-	}
+class RandomButton extends Component {
+	render() {
+		let text = "All";
+		const list = this.props.list;
+		if (list.length !== 0) {
+			if (
+				window.location.pathname !== "/" &&
+				window.location.pathname !== "/all"
+			) {
+				text = list.filter(
+					(category) =>
+						category.id === window.location.pathname.replace("/", "")
+				)[0].name;
+			}
+		}
+		console.log(text);
+		console.log(this.props.theme);
 
-	return (
-		<div className="col-6">
-			<div id="selFilter" className="btn-nohover btnPUGP">
-				{text}
+		return (
+			<div className="col-6">
+				<div
+					id="selFilter"
+					className={`btn-nohover btnPUGP ${this.props.theme.color1} ${this.props.theme.bkgrnd4}   `}
+				>
+					{text}
+				</div>
 			</div>
-		</div>
-	);
-};
+		);
+	}
+}
 
 export default Home;

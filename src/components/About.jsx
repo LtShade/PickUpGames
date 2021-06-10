@@ -25,7 +25,9 @@ class About extends Component {
 						<h2>What's Included?</h2>
 						<div className="row">
 							Pick-Up Games utilizes a few frameworks and libraries, including:
-							<div className="col-4 col-left">
+						</div>
+						<div className="row">
+							<div className="col-6 col-left">
 								<ul>
 									<li>React</li>
 									<li>React Router Dom</li>
@@ -33,7 +35,7 @@ class About extends Component {
 									<li>React-Redux-Form</li>
 									<li>Redux-Thunk</li>
 									<li>Redux-Logger</li>
-									<li>react-datez</li>
+									<li>React-Animation-Components</li>
 								</ul>
 							</div>
 						</div>
