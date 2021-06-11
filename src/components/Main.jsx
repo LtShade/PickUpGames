@@ -40,9 +40,9 @@ class Main extends Component {
 	componentDidUpdate(prevProps) {
 		if (this.props.theme !== prevProps.theme) {
 			this.props.setTheme(window.location.pathname.replace("/", ""));
-			console.log("Updated");
+			//console.log("Updated");
 		} else {
-			console.log("Did not update");
+			//console.log("Did not update");
 		}
 	}
 

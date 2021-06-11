@@ -102,7 +102,7 @@ const Listing = (props) => {
 					<div className="col">
 						{/* List top 5 for demo */}
 						<ListResults
-							results={props.searchResults.slice(0, 5)}
+							results={props.searchResults.slice(0, 5)} // limit to 5
 							theme={props.theme}
 						/>
 					</div>

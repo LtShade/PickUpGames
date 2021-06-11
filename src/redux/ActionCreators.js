@@ -116,6 +116,7 @@ export const postPosting = (posting) => () => {
 		.then((response) =>
 			alert("Thank you for your submission\n" + JSON.stringify(response))
 		)
+		.then((response) => window.location.assign(window.location.href)) //Ew.Ew.Ew. Find a better way.
 		.catch((error) => {
 			console.log("posting", error.message);
 			alert(

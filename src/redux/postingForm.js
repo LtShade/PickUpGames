@@ -2,7 +2,7 @@ export const InitialPosting = [
 	{
 		id: "",
 		title: "",
-		icons: [],
+		icons: ["created"],
 		briefDesc: "",
 		date: "",
 	},

@@ -27,9 +27,24 @@ class AddPosting extends Component {
 	}
 
 	handleSubmit(values) {
-		//add array of icon names for categorization
-		values.iconValues = [];
-		this.props.postPosting(values);
+		//Translate checkboxes to icons array. Revisit and streamline.
+		const valuesIcons = { ...values, icons: [] };
+		if (valuesIcons.iconAtheletic) {
+			valuesIcons.icons = valuesIcons.icons.concat(["atheletics"]);
+		}
+		if (valuesIcons.iconBoardgame) {
+			valuesIcons.icons = valuesIcons.icons.concat(["boardgames"]);
+		}
+		if (valuesIcons.iconRoleplay) {
+			valuesIcons.icons = valuesIcons.icons.concat(["roleplay"]);
+		}
+		if (valuesIcons.iconTabletop) {
+			valuesIcons.icons = valuesIcons.icons.concat(["tabletop"]);
+		}
+		if (valuesIcons.iconOther) {
+			valuesIcons.icons = valuesIcons.icons.concat(["other"]);
+		}
+		this.props.postPosting(valuesIcons);
 	}
 
 	handleChange(values) {}
@@ -237,6 +252,12 @@ class AddPosting extends Component {
 												className="hidden"
 												defaultValue={false}
 											></Control.checkbox>
+											{/* 											<Control.custom
+												model="addPostingForm.icons"
+												id="addPostingForm.icons"
+												className="hidden"
+												defaultValue={["initial"]}
+											/> */}
 										</div>
 									</div>
 								</div>
